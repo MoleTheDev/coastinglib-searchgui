@@ -486,40 +486,26 @@ function Library:CreateTab(name)
 			searchBar.Changed:Connect(UpdateResults)
 		end
 		coroutine.wrap(RDQH_fake_script)()
+	end
+
+	function Library:CreateSearchElement(text, callback)
 		local function SXCSI_fake_script() -- .searchinghandler 
-			local script = Instance.new('LocalScript', NameTab)
+			local script = Instance.new('LocalScript', Tabs.SearchTab)
 
 			--- Roblox Luau Script
 			local button = script.Parent.Items.button
+			button.Visible = false
 
+			local new_button = button:Clone()
 
-			local function moon_hub()
-				print("m when suis")
-			end
+			new_button.Name = text.."button"
+			new_button.Text = text
+			new_button.Parent = script.Parent.Items
 
-			local function print_hub()
-				print("op")
-			end
-
-
-			local hubs = {
-				["Moon Hub"] = moon_hub,
-				["Print Hub"] = print_hub,
-			}
-
-			for hub, callback in pairs(hubs) do
-				local new_button = button:Clone()
-
-				new_button.Name = "Button"
-				new_button.Text = hub
-				new_button.Parent = script.Parent.Items
-
-				new_button.MouseButton1Click:Connect(callback)
-			end
+			new_button.MouseButton1Click:Connect(callback)
 		end
 		coroutine.wrap(SXCSI_fake_script)()
 	end
-
 	
 	function TabElements:CreateSection(name)
 		local NameSection = Instance.new("ImageLabel")
